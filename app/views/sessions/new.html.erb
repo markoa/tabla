@@ -2,6 +2,12 @@
   <div>
     <label for="openid_identifier">OpenID URL:</label>
     <%= text_field_tag(:openid_identifier) %>
+
+    <label for="remember_me" class="inlineLabel">
+      <%= check_box_tag 'remember_me' %>
+      Remember me
+    </label>
+
     <%= submit_tag('Sign In') %>
   </div>
 <% end %>

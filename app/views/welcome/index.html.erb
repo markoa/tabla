@@ -1,8 +1,10 @@
 <h1>Tabla</h1>
 
 <p>
-  Hey there. <br />
-  <% unless logged_in? -%>
+  Hey there <%= current_user.nickname if logged_in? %>!  <br />
+  <% if logged_in? -%>
+    <%= link_to "Logout", logout_path %>
+  <% else -%>
     <%= link_to "Login", new_session_path %>
   <% end -%>
 </p>

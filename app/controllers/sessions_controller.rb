@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    session[:remember_me] = "1" if params[:remember_me] == "1"
     @open_id_url = params[:openid_identifier]
     if request.post? || using_open_id?
       authenticate_with_open_id(@open_id_url,
@@ -15,13 +16,20 @@ class SessionsController < ApplicationController
         else
           identity_url_model = IdentityUrl.find_or_create_by_url(identity_url)
           if identity_url_model.user.nil?
-            flash.now[:notice] = "Thanks for signing up!"
+            flash.now[:notice] = "Wow you've signed up!"
             identity_url_model.create_user && identity_url_model.save
           end
 
           self.current_user = identity_url_model.user
           assign_registration_attributes!(registration)
-          redirect_to('/')
+
+          if session[:remember_me] == "1"
+            self.current_user.remember_me
+            cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+            session[:remember_me] = nil
+          end
+
+          redirect_to root_path
         end
       end
     else
@@ -30,11 +38,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    self.current_user = nil
-    redirect_to('/')
+    self.current_user.forget_me if logged_in?
+    cookies.delete :auth_token
+    reset_session
+    redirect_to root_path
   end
 
-private
+  private
 
   # registration is a hash containing the valid sreg keys given above
   # use this to map them to fields of your user model
