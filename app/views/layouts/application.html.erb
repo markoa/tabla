@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    
+    <title> Tabla </title>
+
+    <%= stylesheet_link_tag "default", :media => "all" %>
+
+    <%= javascript_include_tag :defaults %>
+  </head>
+
+  <body>
+    <div class="spacer"></div>
+
+    <div id="content">
+      <%- if flash[:notice] -%>
+        <center>
+          <div id="app-flash">
+            <%= flash[:notice] %>
+            <div id="app-flash-close">
+              <%= link_to_function "Close", "new Effect.Fade('app-flash')" %>
+            </div>
+          </div>
+        </center>    
+      <%- end -%>
+
+      <%= yield :layout %>
+      
+      <div class="spacer"></div>
+    </div>
+    
+    <div class="spacer"></div>
+  </body>
+
+</html>
