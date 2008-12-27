@@ -5,16 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 
-
-
-  map.open_id_complete 'session', :controller => 'sessions', :action => 'create', :requirements => { :method => :get }
-  map.resource  :session
-
-  map.login  '/login',  :controller => 'sessions', :action => 'new'
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-
-
-
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
