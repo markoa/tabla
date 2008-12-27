@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
 
   has_many :identity_urls, :dependent => :destroy
 
+  validates_presence_of :nickname, :email
+  validates_uniqueness_of :nickname, :email
+
   before_save :generate_salt
 
   # Encrypts some data with the salt.
