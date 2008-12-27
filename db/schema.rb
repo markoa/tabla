@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081227000159) do
+ActiveRecord::Schema.define(:version => 20081227002802) do
 
   create_table "identity_urls", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20081227000159) do
     t.datetime "remember_token_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "salt",                      :limit => 40
   end
 
 end
