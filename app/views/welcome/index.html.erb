@@ -1,5 +1,8 @@
 <h1>Tabla</h1>
 
 <p>
-  <%= link_to "Login", new_session_path %>
+  Hey there. <br />
+  <% unless logged_in? -%>
+    <%= link_to "Login", new_session_path %>
+  <% end -%>
 </p>
