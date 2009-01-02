@@ -1,13 +1,18 @@
-<% form_tag(session_url) do %>
-  <div>
-    <label for="openid_identifier">OpenID URL:</label>
-    <%= text_field_tag(:openid_identifier) %>
 
-    <label for="remember_me" class="inlineLabel">
-      <%= check_box_tag 'remember_me' %>
-      Remember me
-    </label>
+<h2>Login</h2>
 
-    <%= submit_tag('Sign In') %>
-  </div>
-<% end %>
+<% form_tag(session_url) do -%>
+  <label for="openid_identifier">OpenID URL</label> <br />
+  <%= text_field_tag :openid_identifier, '', :size => 24 %>
+
+  <br />
+
+  <label for="remember_me" class="inlineLabel">
+    <%= check_box_tag 'remember_me' %>
+    Remember me
+  </label>
+
+  <br />
+
+  <%= submit_tag 'Sign In' %>
+<% end -%>

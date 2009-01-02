@@ -10,16 +10,15 @@ body {
 
 #content {
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
     padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 40px;
     padding-right: 40px;
     width: 500px;
     background-color: #F4FFF9;
     border: 3px solid #CCC;
-}
-
-.spacer {
-    height: 30px;
 }
 
 a {
@@ -36,22 +35,41 @@ li {
     margin-bottom: 0.8em;
 }
 
-#app-flash {
-    width: 400px;
-    background: #fff1a8;
-    color: #1A3D36;
-    padding: 0.2em;
-}
-
-#app-flash-close {
-    position: relative;
-    float: right;
-    right: 5px;
-    top: -17px;
-    font-size: 12px;
-}
-
-#app-flash-close a {
+#flash {
+    background: #E2F9E3 none repeat scroll 0% 0%;
+    border-bottom: 1px solid #99CC99;
+    border-top: 1px solid #99CC99;
     color: black;
-    background: none;
+    font-size: 14px;
+    padding: 6px;
+    width: 98%;
+}
+
+#error {
+    background: #FFCCCC none repeat scroll 0% 0%;
+    border-bottom: 1px solid red;
+    border-top: 1px solid red;
+    font-size: 0.9em;
+    padding: 6px;
+    width:98%;
+}
+
+input {
+    border: 1px solid #666;
+    font-size: 1.2em;
+    padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input[type="button"], input[type="submit"] {
+    margin-top: 20px;
+}
+
+input[type="button"]:focus, input[type="submit"]:focus {
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    background-color: #FFFFCC;
+    border-color: #666;
 }
