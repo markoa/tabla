@@ -16,14 +16,14 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
-  def test_should_not_save_duplicate_nickname
+  def test_nickname_uniqueness
     user = User.new(:email => "alan@ford.com", :nickname => "alan")
     assert user.save
     another_user = User.new(:email => "boss@ford.com", :nickname => "alan")
     assert !another_user.save
   end
 
-  def test_should_not_save_duplicate_email
+  def test_email_uniqueness
     user = User.new(:email => "alan@ford.com", :nickname => "alan")
     assert user.save
     another_user = User.new(:email => "alan@ford.com", :nickname => "alan2")
