@@ -155,8 +155,8 @@ module OpenIdAuthentication
     end
 
     def requested_url
-      #"#{request.protocol + request.host_with_port + (relative_url_root || '') + request.path}"
-      "#{request.protocol + request.host_with_port + request.path}"
+      relative_root = relative_url_root.nil? ? '' : relative_url_root
+      "#{request.protocol + request.host_with_port + relative_root + request.path}"
     end
 
     def timeout_protection_from_identity_server
