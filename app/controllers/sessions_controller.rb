@@ -39,8 +39,7 @@ class SessionsController < ApplicationController
           self.current_user = identity_url_model.user
           assign_registration_attributes!(registration)
 
-          regcode.user = self.current_user
-          regcode.save
+          regcode.assign_to self.current_user
           session[:registration_code] = nil
 
           if session[:remember_me] == "1"

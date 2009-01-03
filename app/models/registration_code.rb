@@ -12,10 +12,15 @@ class RegistrationCode < ActiveRecord::Base
            :creator_id => user.id)
   end
 
+  def assign_to(user)
+    self.user = user
+    save
+  end
+
   protected
 
   def before_save
-    used = true if not user_id.nil?
+    self.used = true if not user_id.nil?
   end
 
 end
