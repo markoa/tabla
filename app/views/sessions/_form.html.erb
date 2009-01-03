@@ -1,0 +1,24 @@
+
+<% form_tag(session_url) do -%>
+  <label for="openid_identifier">OpenID URL</label> <br />
+  <%= text_field_tag :openid_identifier, '', :size => 32 %>
+
+  <br />
+
+  <% if @registration -%>
+    <label for="registration_code">Registration code</label> <br />
+    <%= text_field_tag :registration_code, '', :size => 40 %>
+    <br />
+  <% end -%>
+
+  <label for="remember_me" class="inlineLabel">
+    <%= check_box_tag 'remember_me' %>
+    Remember me
+  </label>
+
+  <br />
+
+  <%= submit_tag 'Let me in' %>
+  or
+  <%= link_to "go back", "javascript:history.back()" %>
+<% end -%>

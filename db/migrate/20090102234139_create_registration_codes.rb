@@ -2,7 +2,7 @@ class CreateRegistrationCodes < ActiveRecord::Migration
   def self.up
     create_table :registration_codes do |t|
       t.string  :code
-      t.boolean :used
+      t.boolean :used, :default => false
       t.integer :creator_id
       t.integer :user_id
 

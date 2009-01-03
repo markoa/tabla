@@ -1,0 +1,22 @@
+<h1>Listing registration codes</h1>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Used</th>
+    <th>User</th>
+  </tr>
+
+<% for rcode in @reg_codes %>
+  <tr>
+    <td><%=h rcode.code %></td>
+    <td><%=h rcode.used %></td>
+    <td><%=h rcode.user.nickname unless rcode.user.nil? %></td>
+    <td><%= link_to 'Destroy', rcode, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New registration code', new_registration_code_path %>

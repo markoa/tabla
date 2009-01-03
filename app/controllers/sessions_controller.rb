@@ -1,27 +1,47 @@
 class SessionsController < ApplicationController
+
   before_filter :login_required, :except => [:new, :create]
+  before_filter :check_registration_request, :only => [:new, :create]
 
   def new
   end
 
   def create
     session[:remember_me] = "1" if params[:remember_me] == "1"
+    session[:registration_code] = params[:registration_code] unless params[:registration_code].blank?
     @open_id_url = params[:openid_identifier]
+
     if request.post? || using_open_id?
       authenticate_with_open_id(@open_id_url,
           :optional => [:nickname, :email]) do |result, identity_url, registration|
         if !result.successful?
-          flash.now[:error] = result.message
-          render(:action => 'new')
+          flash[:error] = result.message
+          render :action => 'new'
         else
+          regcode = RegistrationCode.find_by_code(session[:registration_code])
+          if regcode.nil?
+            flash[:error] = "Sorry but you need to provide a valid registration code"
+            @registration = true
+            render :action => 'new' and return
+          end
+
           identity_url_model = IdentityUrl.find_or_create_by_url(identity_url)
           if identity_url_model.user.nil?
-            flash.now[:notice] = "Wow you've signed up!"
             identity_url_model.create_user && identity_url_model.save
+            if identity_url_model.user.valid?
+              flash.now[:notice] = "Wow you've signed up!"
+            else
+              flash[:error] = "Please set a nickname and email on your OpenID provider"
+              render :action => 'new' and return
+            end
           end
 
           self.current_user = identity_url_model.user
           assign_registration_attributes!(registration)
+
+          regcode.user = self.current_user
+          regcode.save
+          session[:registration_code] = nil
 
           if session[:remember_me] == "1"
             self.current_user.remember_me
@@ -33,7 +53,7 @@ class SessionsController < ApplicationController
         end
       end
     else
-      render(:action => 'new')
+      render :action => 'new'
     end
   end
 
@@ -61,4 +81,11 @@ class SessionsController < ApplicationController
   def model_to_registration_mapping
     { :nickname => 'nickname', :email => 'email' }
   end
+
+  protected
+
+  def check_registration_request
+    @registration = params[:registration_code] || params[:registration]
+  end
+
 end

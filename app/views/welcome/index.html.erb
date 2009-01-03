@@ -1,10 +1,13 @@
 <h1>Tabla</h1>
 
+<% unless logged_in? -%>
 <p>
-  Hey there <%= current_user.nickname if logged_in? %>!  <br />
-  <% if logged_in? -%>
-    <%= link_to "Logout", logout_path %>
-  <% else -%>
-    <%= link_to "Login", new_session_path %>
-  <% end -%>
+  <%= link_to "Login", login_path %>
+  or
+  <%= link_to "Register", registration_path %>
 </p>
+<% else -%>
+  <%= link_to "Registration codes", registration_codes_path %>
+  <br />
+  <%= link_to "Logout", logout_path %>
+<% end -%>

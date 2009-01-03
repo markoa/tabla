@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20090102234139) do
 
   create_table "registration_codes", :force => true do |t|
     t.string   "code"
-    t.boolean  "used"
+    t.boolean  "used",       :default => false
     t.integer  "creator_id"
     t.integer  "user_id"
     t.datetime "created_at"
