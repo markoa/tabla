@@ -62,6 +62,14 @@ input {
     margin-bottom: 5px;
 }
 
+textarea {
+    font-size: 1em;
+    padding: 5px;
+    background-color: #fff;
+    width: 90%;
+    height: 200px;
+}
+
 input[type="button"], input[type="submit"] {
     margin-top: 20px;
 }
@@ -72,4 +80,9 @@ input[type="button"]:focus, input[type="submit"]:focus {
 input[type="text"]:focus, input[type="password"]:focus {
     background-color: #FFFFCC;
     border-color: #666;
+}
+
+textarea:focus {
+  background-color :#FFFFCC;
+  border-color: #666;
 }
