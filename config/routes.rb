@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.open_id_complete 'session', :controller => 'sessions', :action => 'create', :requirements => { :method => :get }
   map.resource  :session
 
@@ -7,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
   map.registration '/register', :controller => 'sessions', :action => 'new', :registration => true
 
   map.resources :registration_codes
+
+  map.resources :pages, :has_many => :revisions
 
   # The priority is based upon order of creation: first created -> highest priority.
 

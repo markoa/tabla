@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_one  :registration_code
 
+  has_many :pages
+  has_many :revisions
+
   validates_presence_of :nickname, :email
   validates_uniqueness_of :nickname, :email
 

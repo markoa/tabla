@@ -1,0 +1,28 @@
+<p>
+  <b>Content:</b>
+  <%=h @revision.content %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @revision.comment %>
+</p>
+
+<p>
+  <b>Minor:</b>
+  <%=h @revision.minor %>
+</p>
+
+<p>
+  <b>Page:</b>
+  <%=h @revision.page %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @revision.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_revision_path(@revision) %> |
+<%= link_to 'Back', revisions_path %>

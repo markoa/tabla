@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090102234139) do
+ActiveRecord::Schema.define(:version => 20090103163205) do
 
   create_table "identity_urls", :force => true do |t|
     t.integer  "user_id"
@@ -35,10 +35,27 @@ ActiveRecord::Schema.define(:version => 20090102234139) do
     t.string  "salt",       :null => false
   end
 
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "registration_codes", :force => true do |t|
     t.string   "code"
     t.boolean  "used",       :default => false
     t.integer  "creator_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "revisions", :force => true do |t|
+    t.text     "content"
+    t.string   "comment"
+    t.boolean  "minor",      :default => false
+    t.integer  "page_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

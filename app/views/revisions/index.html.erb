@@ -1,0 +1,28 @@
+<h1>Listing revisions</h1>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th>Comment</th>
+    <th>Minor</th>
+    <th>Page</th>
+    <th>User</th>
+  </tr>
+
+<% for revision in @revisions %>
+  <tr>
+    <td><%=h revision.content %></td>
+    <td><%=h revision.comment %></td>
+    <td><%=h revision.minor %></td>
+    <td><%=h revision.page %></td>
+    <td><%=h revision.user %></td>
+    <td><%= link_to 'Show', revision %></td>
+    <td><%= link_to 'Edit', edit_revision_path(revision) %></td>
+    <td><%= link_to 'Destroy', revision, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New revision', new_revision_path %>
