@@ -1,4 +1,7 @@
 class RevisionsController < ApplicationController
+
+  before_filter :load_page
+
   # GET /revisions
   # GET /revisions.xml
   def index
@@ -82,4 +85,11 @@ class RevisionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+
+  def load_page
+    @page = Page.find(params[:page_id])
+  end
+
 end

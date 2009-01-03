@@ -16,13 +16,13 @@
     <td><%=h revision.minor %></td>
     <td><%=h revision.page %></td>
     <td><%=h revision.user %></td>
-    <td><%= link_to 'Show', revision %></td>
-    <td><%= link_to 'Edit', edit_revision_path(revision) %></td>
-    <td><%= link_to 'Destroy', revision, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', [@page, revision] %></td>
+    <td><%= link_to 'Edit', [:edit, @page, revision] %></td>
+    <td><%= link_to 'Destroy', [@page, revision], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New revision', new_revision_path %>
+<%= link_to 'New revision', new_page_revision_path(@page) %>

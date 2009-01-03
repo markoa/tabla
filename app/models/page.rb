@@ -5,4 +5,8 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def content
+    self.revisions.last.content
+  end
+
 end
