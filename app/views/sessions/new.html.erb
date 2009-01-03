@@ -3,7 +3,7 @@
 
 <% form_tag(session_url) do -%>
   <label for="openid_identifier">OpenID URL</label> <br />
-  <%= text_field_tag :openid_identifier, '', :size => 24 %>
+  <%= text_field_tag :openid_identifier, '', :size => 32 %>
 
   <br />
 
@@ -14,5 +14,5 @@
 
   <br />
 
-  <%= submit_tag 'Sign In' %>
+  <%= submit_tag 'Let me in' %>
 <% end -%>
