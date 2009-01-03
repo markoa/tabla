@@ -13,6 +13,16 @@
       <%= r.label :content %> <br />
       <%= r.text_area :content %>
     </p>
+
+    <p>
+      <%= r.label :comment %> <br />
+      <%= r.text_field :comment %>
+    </p>
+
+    <p>
+      <%= r.check_box :minor %>
+      <%= r.label :minor %>
+    </p>
   <% end %>
   
   <%= f.hidden_field :user_id %>

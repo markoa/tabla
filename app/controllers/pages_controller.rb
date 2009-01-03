@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_filter :login_required
+
   # GET /pages
   # GET /pages.xml
   def index
@@ -67,13 +70,15 @@ class PagesController < ApplicationController
     @page.revisions << @revision
 
     respond_to do |format|
-      if @revision.save and @page.update_attributes(params[:page])
-        flash[:notice] = 'Page was successfully updated.'
-        format.html { redirect_to(@page) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
+      Page.transaction do
+        if @page.update_attributes(params[:page]) and @revision.save
+          flash[:notice] = 'Page was successfully updated.'
+          format.html { redirect_to(@page) }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
