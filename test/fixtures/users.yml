@@ -1,7 +1,14 @@
 djura:
+  id: 1
   nickname: djura
   email: djura@dj.com
 
 lee:
+  id: 2
   nickname: lee
   email: lee@dj.com
+
+registered:
+  id: 3
+  nickname: regman
+  email: regman@tabla.com

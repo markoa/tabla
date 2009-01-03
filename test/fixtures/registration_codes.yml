@@ -1,2 +1,4 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+one:
+  code: 0123456789012345678901234567890123456789

@@ -31,18 +31,24 @@ class SessionsControllerTest < ActionController::TestCase
     assert_template "new"
   end
 
-  def test_should_login_with_open_id
-    user = User.new
-    identity_url = IdentityUrl.new(:url => 'http://valid.myopenid.com', :user => user)
+  def test_should_login_with_known_open_id
+    identity_url = identity_urls(:one)
+    user = users(:registered)
+
     IdentityUrl.stubs(:find_or_create_by_url).returns(identity_url)
     @controller.stubs(:assign_registration_attributes!).returns(true)
-
     @controller.expects(:current_user=).with(user)
+
     post :create, :openid_identifier => "http://valid.myopenid.com"
   end
 
   def test_login_should_redirect_on_success
-    post :create, :openid_identifier => "http://valid.myopenid.com"
+    post '/login', :openid_identifier => "http://valid.myopenid.com"
+    assert_response :redirect
+  end
+
+  def test_register_should_redirect_on_success
+    post '/register', :openid_identifier => "http://valid.myopenid.com", :registration_code => registration_codes(:one).code
     assert_response :redirect
   end
 
@@ -54,12 +60,12 @@ class SessionsControllerTest < ActionController::TestCase
     user.expects(:nickname=).with('nick')
     user.expects(:email=).with('email@test.net')
     user.expects(:save).returns(true)
-    post :create, :openid_identifier => "http://valid.myopenid.com"
+    post :create, :openid_identifier => "http://valid.myopenid.com", :registration_code => registration_codes(:one).code
   end
 
   def test_should_create_new_identity_url_and_user
     assert_difference('User.count') do
-      post :create, :openid_identifier => "http://valid.myopenid.com"
+      post '/register', :openid_identifier => "http://valid.myopenid.com", :registration_code => registration_codes(:one).code
     end
   end
 

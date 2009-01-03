@@ -18,16 +18,17 @@ class SessionsController < ApplicationController
           flash[:error] = result.message
           render :action => 'new'
         else
-          regcode = RegistrationCode.find_by_code(session[:registration_code])
-          if regcode.nil?
-            flash[:error] = "Sorry but you need to provide a valid registration code"
-            @registration = true
-            render :action => 'new' and return
-          end
-
           identity_url_model = IdentityUrl.find_or_create_by_url(identity_url)
           if identity_url_model.user.nil?
+            regcode = RegistrationCode.find_by_code(session[:registration_code])
+            if regcode.nil?
+              flash[:error] = "Sorry but you need to provide a valid registration code"
+              @registration = true
+              render :action => 'new' and return
+            end
+
             identity_url_model.create_user && identity_url_model.save
+
             if identity_url_model.user.valid?
               flash.now[:notice] = "Wow you've signed up!"
             else
@@ -39,7 +40,7 @@ class SessionsController < ApplicationController
           self.current_user = identity_url_model.user
           assign_registration_attributes!(registration)
 
-          regcode.assign_to self.current_user
+          regcode.assign_to self.current_user unless regcode.nil?
           session[:registration_code] = nil
 
           if session[:remember_me] == "1"
