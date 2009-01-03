@@ -21,13 +21,13 @@ class SessionsController < ApplicationController
           identity_url_model = IdentityUrl.find_or_create_by_url(identity_url)
           if identity_url_model.user.nil?
             regcode = RegistrationCode.find_by_code(session[:registration_code])
-            if regcode.nil?
+            if regcode.nil? and User.count > 0
               flash[:error] = "Sorry but you need to provide a valid registration code"
               @registration = true
               render :action => 'new' and return
             end
 
-            identity_url_model.create_user && identity_url_model.save
+            identity_url_model.create_user(:nickname => params['openid.sreg.nickname'], :email => params['openid.sreg.email']) && identity_url_model.save
 
             if identity_url_model.user.valid?
               flash.now[:notice] = "Wow you've signed up!"

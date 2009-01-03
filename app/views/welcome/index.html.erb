@@ -1,11 +1,17 @@
 <h1>Tabla</h1>
 
 <% unless logged_in? -%>
-<p>
-  <%= link_to "Login", login_path %>
-  or
-  <%= link_to "Register", registration_path %>
-</p>
+  <% if User.count > 0 -%>
+  <p>
+    <%= link_to "Login", login_path %>
+    or
+    <%= link_to "Register", registration_path %>
+  </p>
+  <% else -%>
+  <p>
+    <%= link_to "Bootstrap!", login_path %>
+  </p>
+  <% end -%>
 <% else -%>
   <%= link_to "Registration codes", registration_codes_path %>
   <br />
