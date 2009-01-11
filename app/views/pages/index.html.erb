@@ -8,15 +8,13 @@
 
 <% for page in @pages %>
   <tr>
-    <td><%=h page.name %></td>
+    <td><%=link_to h(page.name), page %></td>
     <td><%=h page.user.nickname %></td>
-    <td><%= link_to 'Show', page %></td>
-    <td><%= link_to 'Edit', edit_page_path(page) %></td>
-    <td><%= link_to 'Destroy', page, :confirm => 'Are you sure? This will delete all revisions.', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New page', new_page_path %>
+<%= link_to 'New page', new_page_path %> |
+<%= link_to 'Home', root_path %>
