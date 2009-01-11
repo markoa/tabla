@@ -44,7 +44,8 @@ class SessionsController < ApplicationController
           session[:registration_code] = nil
 
           if session[:remember_me] == "1"
-            remember_user!
+            new_cookie = true
+            handle_remember_cookie! new_cookie
             session[:remember_me] = nil
           end
 
