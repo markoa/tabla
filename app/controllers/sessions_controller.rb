@@ -44,8 +44,7 @@ class SessionsController < ApplicationController
           session[:registration_code] = nil
 
           if session[:remember_me] == "1"
-            self.current_user.remember_me
-            cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+            remember_user!
             session[:remember_me] = nil
           end
 
@@ -58,9 +57,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    self.current_user.forget_me if logged_in?
-    cookies.delete :auth_token
-    reset_session
+    logout_keeping_session!
     redirect_to root_path
   end
 
