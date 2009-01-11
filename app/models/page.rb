@@ -14,4 +14,8 @@ class Page < ActiveRecord::Base
     self.revisions.last.content
   end
 
+  def last_updated_at
+    self.revisions.last.created_at
+  end
+
 end

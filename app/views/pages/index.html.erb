@@ -1,18 +1,19 @@
 <h1>Listing pages</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Creator</th>
-  </tr>
-
+<ul>
+<% last_date = nil -%>
 <% for page in @pages %>
-  <tr>
-    <td><%=link_to h(page.name), page %></td>
-    <td><%=h page.user.nickname %></td>
-  </tr>
+  <% date = page.last_updated_at.to_date %>
+  <% if date != last_date -%>
+    <h3> <%= date.to_date.to_s(:short) %> </h3>
+    <% last_date = date -%>
+  <% end -%>
+
+  <li>
+    <%=link_to h(page.name), page %>
+  </li>
 <% end %>
-</table>
+</ul>
 
 <br />
 

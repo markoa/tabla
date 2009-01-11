@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages.xml
   def index
     @pages = Page.find(:all)
-    @pages.sort { |a, b| a.revisions.first.created_at <=> b.revisions.first.created_at }
+    @pages.sort { |a, b| a.last_updated_at <=> b.last_updated_at }
 
     respond_to do |format|
       format.html # index.html.erb
