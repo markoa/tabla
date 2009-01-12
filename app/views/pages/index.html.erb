@@ -1,21 +1,45 @@
+<script type='text/javascript'>
+  function authToken() {
+    return 'authenticity_token=' + encodeURIComponent(AUTH_TOKEN);
+  }
+
+  document.observe('dom:loaded', function() {
+    // clear the classic href
+    $('sortDate').href = '#';
+    $('sortName').href = '#';
+
+    Event.observe('sortDate', 'click', function() {
+      var link = $('sortDate');
+      path = <%= "'#{sorted_by_date_pages_path}'" %>;
+      new Ajax.Request(path,
+        { asynchronous: true, evalScripts: true, method: 'get',
+          parameters: authToken()
+        });
+      return false;
+    });
+
+    Event.observe('sortName', 'click', function() {
+      var link = $('sortName');
+      path = <%= "'#{sorted_by_name_pages_path}'" %>;
+      new Ajax.Request(path,
+        { asynchronous: true, evalScripts: true, method: 'get',
+          parameters: authToken()
+        });
+      return false;
+    });
+  });
+</script>
+
 <h1>Listing pages</h1>
 
-<ul>
-<% last_date = nil -%>
-<% for page in @pages %>
-  <% date = page.last_updated_at.to_date %>
-  <% if date != last_date -%>
-    <h3> <%= date.to_date.to_s(:short) %> </h3>
-    <% last_date = date -%>
-  <% end -%>
-
-  <li>
-    <%=link_to h(page.name), page %>
-  </li>
-<% end %>
-</ul>
+<div id="pageList">
+  <%= render :partial => 'date_separated' %>
+</div>
 
 <br />
 
 <%= link_to 'New page', new_page_path %> |
+View sorted by
+<%= link_to 'Date', sorted_by_date_pages_path, :id => 'sortDate', :class => 'remote' %> or
+<%= link_to 'Name', sorted_by_name_pages_path, :id => 'sortName', :class => 'remote' %> |
 <%= link_to 'Home', root_path %>

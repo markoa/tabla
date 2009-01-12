@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages.xml
   def index
     @pages = Page.find(:all)
-    @pages.sort { |a, b| a.last_updated_at <=> b.last_updated_at }
+    @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -93,6 +93,36 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(pages_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def sorted_by_date
+    @pages = Page.find(:all)
+    @pages.sort { |a, b| b.last_updated_at <=> a.last_updated_at }
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'index' } #TODO: actually render smt
+      format.xml  { render :xml => @pages }
+      format.js do
+        render :update do |page|
+          page.replace_html 'pageList', :partial => 'date_separated'
+        end
+      end
+    end
+  end
+
+  def sorted_by_name
+    @pages = Page.find(:all)
+    @pages.sort { |a, b| a.name <=> b.name }
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'index' } #TODO: actually render smt
+      format.xml  { render :xml => @pages }
+      format.js do
+        render :update do |page|
+          page.replace_html 'pageList', :partial => 'list_dump'
+        end
+      end
     end
   end
 end

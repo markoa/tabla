@@ -9,7 +9,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :registration_codes
 
-  map.resources :pages, :has_many => :revisions
+  map.resources :pages, :has_many => :revisions, :collection => {
+    :sorted_by_date => :get,
+    :sorted_by_name => :get
+  }
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,0 +1,15 @@
+<ul>
+<% last_date = nil -%>
+<% for page in @pages %>
+  <% date = page.last_updated_at.to_date %>
+  <% if date != last_date -%>
+    <h3> <%= date.to_date.to_s(:short) %> </h3>
+    <% last_date = date -%>
+  <% end -%>
+
+  <li>
+    <%=link_to h(page.name), page %>
+  </li>
+<% end -%>
+</ul>
+
