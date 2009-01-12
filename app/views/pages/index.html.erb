@@ -1,32 +1,10 @@
 <script type='text/javascript'>
-  function authToken() {
-    return 'authenticity_token=' + encodeURIComponent(AUTH_TOKEN);
-  }
-
   document.observe('dom:loaded', function() {
-    // clear the classic href
     $('sortDate').href = '#';
     $('sortName').href = '#';
 
-    Event.observe('sortDate', 'click', function() {
-      var link = $('sortDate');
-      path = <%= "'#{sorted_by_date_pages_path}'" %>;
-      new Ajax.Request(path,
-        { asynchronous: true, evalScripts: true, method: 'get',
-          parameters: authToken()
-        });
-      return false;
-    });
-
-    Event.observe('sortName', 'click', function() {
-      var link = $('sortName');
-      path = <%= "'#{sorted_by_name_pages_path}'" %>;
-      new Ajax.Request(path,
-        { asynchronous: true, evalScripts: true, method: 'get',
-          parameters: authToken()
-        });
-      return false;
-    });
+    remote_get_link_to(<%= "'#{sorted_by_date_pages_url}'" %>, 'sortDate');
+    remote_get_link_to(<%= "'#{sorted_by_name_pages_url}'" %>, 'sortName');
   });
 </script>
 
@@ -39,7 +17,7 @@
 <br />
 
 <%= link_to 'New page', new_page_path %> |
-View sorted by
+Sort by
 <%= link_to 'Date', sorted_by_date_pages_path, :id => 'sortDate', :class => 'remote' %> or
 <%= link_to 'Name', sorted_by_name_pages_path, :id => 'sortName', :class => 'remote' %> |
 <%= link_to 'Home', root_path %>
