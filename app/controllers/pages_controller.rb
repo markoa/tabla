@@ -113,7 +113,7 @@ class PagesController < ApplicationController
 
   def sorted_by_name
     @pages = Page.find(:all)
-    @pages.sort { |a, b| a.name <=> b.name }
+    @pages.sort! { |a, b| a.name <=> b.name }
 
     respond_to do |format|
       format.html { redirect_to :action => 'index' } #TODO: actually render smt
