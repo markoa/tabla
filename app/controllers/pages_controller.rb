@@ -98,7 +98,7 @@ class PagesController < ApplicationController
 
   def sorted_by_date
     @pages = Page.find(:all)
-    @pages.sort { |a, b| b.last_updated_at <=> a.last_updated_at }
+    @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
       format.html { redirect_to :action => 'index' } #TODO: actually render smt
