@@ -9,7 +9,11 @@ class PagesController < ApplicationController
     @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        render :partial => 'list',
+          :locals => { :sort => 'date' },
+          :layout => true
+      end
       format.xml  { render :xml => @pages }
     end
   end
@@ -96,12 +100,15 @@ class PagesController < ApplicationController
     end
   end
 
-  def sorted_by_date
+  # GET /pages/by_date
+  # GET /pages/by_date.xml
+  # GET /pages/by_date.js
+  def by_date
     @pages = Page.find(:all)
     @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
-      format.html { redirect_to :action => 'index' } #TODO: actually render smt
+      format.html { redirect_to :action => 'index' }
       format.xml  { render :xml => @pages }
       format.js do
         render :update do |page|
@@ -111,16 +118,25 @@ class PagesController < ApplicationController
     end
   end
 
-  def sorted_by_name
+  # GET /pages/by_name
+  # GET /pages/by_name.xml
+  # GET /pages/by_name.js
+  def by_name
     @pages = Page.find(:all)
     @pages.sort! { |a, b| a.name <=> b.name }
 
     respond_to do |format|
-      format.html { redirect_to :action => 'index' } #TODO: actually render smt
+      format.html do
+        render :partial => 'list',
+          :locals => { :sort => 'name' },
+          :layout => true
+      end
+
       format.xml  { render :xml => @pages }
+
       format.js do
         render :update do |page|
-          page.replace_html 'pageList', :partial => 'list_dump'
+          page.replace_html 'pageList', :partial => 'dump'
         end
       end
     end

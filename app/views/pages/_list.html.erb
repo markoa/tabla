@@ -1,0 +1,26 @@
+<% # local: sort [date, name] -%>
+
+<script type='text/javascript'>
+  document.observe('dom:loaded', function() {
+    remote_get_link_to(<%= "'#{by_date_pages_path}'" %>, 'sortDate');
+    remote_get_link_to(<%= "'#{by_name_pages_path}'" %>, 'sortName');
+  });
+</script>
+
+<h1>Listing pages</h1>
+
+<div id="pageList">
+  <% if sort == 'date' -%>
+    <%= render :partial => 'date_separated' %>
+  <% else -%>
+    <%= render :partial => 'dump' %>
+  <% end -%>
+</div>
+
+<br />
+
+<%= link_to 'New page', new_page_path %> |
+Sort by
+<%= link_to 'Date', by_date_pages_path, :id => 'sortDate' %> or
+<%= link_to 'Name', by_name_pages_path, :id => 'sortName' %> |
+<%= link_to 'Home', root_path %>
