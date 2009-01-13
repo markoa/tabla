@@ -72,11 +72,17 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     @revision = Revision.new(params[:revision])
-    @page.revisions << @revision
 
     respond_to do |format|
       Page.transaction do
-        if @page.update_attributes(params[:page]) and @revision.save
+        page_updated = @page.update_attributes(params[:page])
+        if @page.content != @revision.content
+          @page.revisions << @revision
+          revisioned = @revision.save
+        else
+          revisioned = true
+        end
+        if page_updated and revisioned
           flash[:notice] = 'Page was successfully updated.'
           format.html { redirect_to(@page) }
           format.xml  { head :ok }

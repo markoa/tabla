@@ -3,7 +3,20 @@
 Tabla is a lightweight wiki built with Ruby on Rails.
 It's still quite early in development.
 
-The first time application runs without any user data, it shows a 'Bootstrap' link allowing the first person to log in and register with an OpenID.
+The first time application runs without any user data,
+it shows a 'Bootstrap' link allowing the first person
+to log in and register with an OpenID.
+
 For each new user somebody must create and give a new registration code.
-The wiki is thus made to be used in closed groups,
-but that can be changed easily.
+
+The wiki is thus by default made to be used in closed groups,
+but that can be tweaked easily.
+
+== Syntax
+
+Tabla's syntax is Markdown[http://daringfireball.net/projects/markdown/].
+
+== Dependencies
+
+rails: 2.2.2
+gems:  ruby-openid mocha BlueCloth
