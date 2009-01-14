@@ -15,9 +15,11 @@ class Page < ActiveRecord::Base
   end
 
   def last_updated_at
-    rev_date = self.revisions.last.created_at
-    self_date = self.updated_at
-    return (rev_date > self_date) ? rev_date : self_date
+    self.revisions.last.created_at
+  end
+
+  def last_updater
+    self.revisions.last.user
   end
 
 end

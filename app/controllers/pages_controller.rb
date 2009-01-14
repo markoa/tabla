@@ -34,7 +34,7 @@ class PagesController < ApplicationController
   def new
     name = params[:name]
     @page = @user.pages.new(:name => name)
-    @revision = @page.revisions.new
+    @revision = @page.revisions.new(:user => @user)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +45,7 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
-    @revision = @page.revisions.new
+    @revision = @page.revisions.new(:user => @user)
     @revision.content = @page.revisions.last.content
   end
 
@@ -73,22 +73,16 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     @revision = Revision.new(params[:revision])
+    @page.revisions << @revision
 
     respond_to do |format|
       Page.transaction do
-        page_updated = @page.update_attributes(params[:page])
-        if @page.content != @revision.content
-          @page.revisions << @revision
-          revisioned = @revision.save
-        else
-          revisioned = true
-        end
-        if page_updated and revisioned
-          flash[:notice] = 'Page was successfully updated.'
+        if @page.update_attributes(params[:page]) and @revision.save
+          flash[:notice] = "Page was successfully updated."
           format.html { redirect_to(@page) }
           format.xml  { head :ok }
         else
-          format.html { render :action => "edit" }
+          format.html { render :action => 'edit' }
           format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
         end
       end
