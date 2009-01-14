@@ -3,6 +3,19 @@ module PagesHelper
   def wikify(str)
     out = str.clone
 
+    # Code Blocks
+    # replaces {{{triple braced blocks}}}
+    out.gsub!(/(!?)\{\{\{(\r?\n)?(.*?)(\r?\n)?\}\}\}/m) do |match|
+      unless $1 == "!"
+        r = $3
+        p1, p2 = "", ""
+        p1, p2 = "<pre class=\"code\">", "</pre>" if $2 =~ /^[\n\r]/
+        p1 + "<code>" + "#{r}" + "</code>" + p2
+      else
+        match[1, match.length]
+      end
+    end
+
     # Wiki links
     # [wiki PageName]
     # [smt else http://link.com]
