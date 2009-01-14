@@ -32,7 +32,8 @@ class PagesController < ApplicationController
   # GET /pages/new
   # GET /pages/new.xml
   def new
-    @page = @user.pages.new
+    name = params[:name]
+    @page = @user.pages.new(:name => name)
     @revision = @page.revisions.new
 
     respond_to do |format|

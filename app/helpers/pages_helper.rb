@@ -17,7 +17,8 @@ module PagesHelper
         unless page.nil?
           link_to(a, page_url(page))
         else
-          link_to(a, new_page_url, :title => "Create this page")
+          link_to(a, new_page_url(:name => page_name),
+                  :class => 'nonexistingPage', :title => "Create this page")
         end
       else
         a = tokens.slice(0, tokens.size-1).join(" ")
