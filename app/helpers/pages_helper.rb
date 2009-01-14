@@ -7,10 +7,9 @@ module PagesHelper
     # replaces {{{triple braced blocks}}}
     out.gsub!(/(!?)\{\{\{(\r?\n)?(.*?)(\r?\n)?\}\}\}/m) do |match|
       unless $1 == "!"
-        r = $3
-        p1, p2 = "", ""
-        p1, p2 = "<pre class=\"code\">\n", "\n</pre>" if $2 =~ /^[\n\r]/
-        p1 + "<code>" + "#{r}" + "</code>" + p2
+        code = $3
+        convertor = Syntax::Convertors::HTML.for_syntax "ruby"
+        convertor.convert(code)
       else
         match[1, match.length]
       end

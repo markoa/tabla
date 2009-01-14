@@ -11,9 +11,14 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem "mocha", {:version=>">= 0.9.0"}
+  config.gem "mocha", { :version => ">= 0.9.0" }
 
-  config.gem "ruby-openid", {:lib=>"openid", :version=>">= 2.0.4"}
+  config.gem "ruby-openid", { :lib => "openid", :version => ">= 2.0.4" }
+
+  # for some reason BlueCloth is not recognized at this point on Ubuntu 8.10
+  #config.gem "BlueCloth", { :version => ">= 1.0.0" }
+
+  config.gem "syntax", { :version => ">= 1.0.0" }
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers

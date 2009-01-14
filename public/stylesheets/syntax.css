@@ -1,0 +1,18 @@
+.syntax .normal {}
+.syntax .comment { color: #005; font-style: italic; }
+.syntax .keyword { color: #A00; font-weight: bold; }
+.syntax .method { color: #077; }
+.syntax .class { color: #074; }
+.syntax .module { color: #050; }
+.syntax .punct { color: #447; font-weight: bold; }
+.syntax .symbol { color: #099; }
+.syntax .string { color: #944; background: #FFE; }
+.syntax .char { color: #F07; }
+.syntax .ident { color: #004; }
+.syntax .constant { color: #07F; }
+.syntax .regex { color: #B66; background: #FEF; }
+.syntax .number { color: #F99; }
+.syntax .attribute { color: #7BB; }
+.syntax .global { color: #7FB; }
+.syntax .expr { color: #227; }
+.syntax .escape { color: #277; }
