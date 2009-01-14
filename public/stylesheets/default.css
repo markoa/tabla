@@ -31,6 +31,10 @@ a:hover {
     background-color: #7C4035;
 }
 
+.nonexistingPage {
+    color: #CD6F5C;
+}
+
 li {
     margin-bottom: 0.8em;
 }
