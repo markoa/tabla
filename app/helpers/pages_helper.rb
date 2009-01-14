@@ -9,7 +9,7 @@ module PagesHelper
       unless $1 == "!"
         r = $3
         p1, p2 = "", ""
-        p1, p2 = "<pre class=\"code\">", "</pre>" if $2 =~ /^[\n\r]/
+        p1, p2 = "<pre class=\"code\">\n", "\n</pre>" if $2 =~ /^[\n\r]/
         p1 + "<code>" + "#{r}" + "</code>" + p2
       else
         match[1, match.length]
@@ -18,13 +18,18 @@ module PagesHelper
 
     # Wiki links
     # [wiki PageName]
+    # [wiki page name in human syntax PageName]
     # [smt else http://link.com]
     out.gsub!(/(!?)\[(.*?)(\|(.*?))?\]/) do |match|
       tokens = $2.split
-      if tokens.size == 2 and tokens.first == "wiki"
+      if tokens.first == "wiki"
         a = tokens.last
         page_name = a.clone
         page_name.gsub!(/[A-Z]/) { |c| " #{c.downcase}" }.lstrip!
+
+        if tokens.size > 2 # some words override PageName
+          a = tokens[1..tokens.size-2].join(" ")
+        end
 
         page = Page.find_by_name(page_name)
         unless page.nil?
