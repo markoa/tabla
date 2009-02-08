@@ -101,14 +101,33 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET /pages/by_date
-  # GET /pages/by_date.xml
-  # GET /pages/by_date.js
-  def by_date
+  # GET /pages/by_date_created_
+  # GET /pages/by_date_created.xml
+  # GET /pages/by_date_created.js
+  def by_date_created
+    @pages = Page.find(:all, :order => "created_at DESC")
+
+    respond_to do |format|
+      # TODO: redirecting is not the solution
+      format.html { redirect_to :action => 'index' }
+      format.xml  { render :xml => @pages }
+      format.js do
+        render :update do |page|
+          page.replace_html 'pageList', :partial => 'date_separated'
+        end
+      end
+    end
+  end
+
+  # GET /pages/by_date_updated
+  # GET /pages/by_date_updated.xml
+  # GET /pages/by_date_updated.js
+  def by_date_updated
     @pages = Page.find(:all)
     @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
+      # TODO: redirecting is not the solution
       format.html { redirect_to :action => 'index' }
       format.xml  { render :xml => @pages }
       format.js do

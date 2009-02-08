@@ -2,7 +2,8 @@
 
 <script type='text/javascript'>
   document.observe('dom:loaded', function() {
-    remote_get_link_to(<%= "'#{by_date_pages_path}'" %>, 'sortDate');
+    remote_get_link_to(<%= "'#{by_date_created_pages_path}'" %>, 'sortDateCreated');
+    remote_get_link_to(<%= "'#{by_date_updated_pages_path}'" %>, 'sortDateUpdated');
     remote_get_link_to(<%= "'#{by_name_pages_path}'" %>, 'sortName');
   });
 </script>
@@ -21,6 +22,7 @@
 
 <%= link_to 'New page', new_page_path %> |
 Sort by
-<%= link_to 'Date', by_date_pages_path, :id => 'sortDate' %> or
+<%= link_to 'Date created', by_date_created_pages_path, :id => 'sortDateCreated' %>,
+<%= link_to 'Date updated', by_date_updated_pages_path, :id => 'sortDateUpdated' %> or
 <%= link_to 'Name', by_name_pages_path, :id => 'sortName' %> |
 <%= link_to 'Home', root_path %>

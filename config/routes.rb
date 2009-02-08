@@ -10,7 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :registration_codes
 
   map.resources :pages, :has_many => :revisions, :collection => {
-    :by_date => :get,
+    :by_date_created => :get,
+    :by_date_updated => :get,
     :by_name => :get
   }
 
