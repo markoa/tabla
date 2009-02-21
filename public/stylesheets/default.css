@@ -1,11 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-    background: #CFE2C4;
+    background: #7B799B;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     font-size: 16px;
     line-height: 18px;
-    color: #1B1B1B;
+    color: #181830;
 }
 
 #content {
@@ -22,13 +22,13 @@ body {
 }
 
 a {
-    color: #7C4035;
+    color: #660E24;
     text-decoration: none;
 }
 
 a:hover {
     color: #F4FFF9;
-    background-color: #7C4035;
+    background-color: #660E24;
 }
 
 h1 {
