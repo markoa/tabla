@@ -2,13 +2,15 @@
   <%= stylesheet_link_tag "diff.css" %>
 <% end %>
 
-<p>
-  Showing differences between revisions
+<h1> Showing differences </h1>
+
+<h4>
+  Between revisions
   <%= link_to @rev_to.hid.to_s, [@page, @rev_to] %>
   and
   <%= link_to @rev_from.hid.to_s, [@page, @rev_from] %>
   of page <%= link_to @page.name, @page %>.
-</p>
+</h4>
 
 <% if @rev_from.content == @rev_to.content -%>
   <p>
