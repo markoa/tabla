@@ -108,9 +108,14 @@ class PagesController < ApplicationController
     @pages = Page.find(:all, :order => "created_at DESC")
 
     respond_to do |format|
-      # TODO: redirecting is not the solution
-      format.html { redirect_to :action => 'index' }
+      format.html do
+        render :partial => 'list',
+          :locals => { :sort => 'date' },
+          :layout => true
+      end
+      
       format.xml  { render :xml => @pages }
+      
       format.js do
         render :update do |page|
           page.replace_html 'pageList', :partial => 'date_separated'
@@ -127,9 +132,14 @@ class PagesController < ApplicationController
     @pages.sort! { |a, b| b.last_updated_at <=> a.last_updated_at }
 
     respond_to do |format|
-      # TODO: redirecting is not the solution
-      format.html { redirect_to :action => 'index' }
+      format.html do
+        render :partial => 'list',
+          :locals => { :sort => 'date' },
+          :layout => true
+      end
+      
       format.xml  { render :xml => @pages }
+
       format.js do
         render :update do |page|
           page.replace_html 'pageList', :partial => 'date_separated'
