@@ -1,17 +1,20 @@
 <%= wikify @revision.content %>
 
 <p>
-  <% if @revision.minor? -%>
-    Minor change
+  <% if @revision.user -%>
+    <%=h @revision.user.nickname %>
   <% else -%>
-    <b>Comment:</b>
-    <%=h @revision.comment %>
+    a user whose account has been deleted
   <% end -%>
-</p>
 
-<p>
-  <b>User:</b>
-  <%=h @revision.user %>
+  made it on <%= @revision.created_at %>
+  <% if @revision.minor? -%>
+    and said that it's just a minor change
+  <% elsif @revision.comment.blank? -%>
+    leaving no comment behind
+  <% else -%>
+    saying ❝<%=h @revision.comment %>❞
+  <% end -%>
 </p>
 
 <%= link_to 'Back', page_revisions_path(@page) %>
