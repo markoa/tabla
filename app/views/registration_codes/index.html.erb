@@ -10,9 +10,11 @@
 <% for rcode in @reg_codes %>
   <tr>
     <td><%=h rcode.code %></td>
-    <td><%=h rcode.used %></td>
+    <td><%= rcode.used? ? "Y" : "Pending"  %></td>
     <td><%=h rcode.user.nickname unless rcode.user.nil? %></td>
+    <% if not rcode.used? -%>
     <td><%= link_to 'Destroy', rcode, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end -%>
   </tr>
 <% end %>
 </table>
