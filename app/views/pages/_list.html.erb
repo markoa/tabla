@@ -10,6 +10,13 @@
 
 <h1>Pages</h1>
 
+<%= link_to 'New page', new_page_path %> |
+Sort by
+<%= link_to 'Date created', by_date_created_pages_path, :id => 'sortDateCreated' %>,
+<%= link_to 'Date updated', by_date_updated_pages_path, :id => 'sortDateUpdated' %> or
+<%= link_to 'Name', by_name_pages_path, :id => 'sortName' %> |
+<%= link_to 'Home', root_path %>
+
 <div id="pageList">
   <% if sort == 'date' -%>
     <%= render :partial => 'date_separated' %>
@@ -17,12 +24,3 @@
     <%= render :partial => 'dump' %>
   <% end -%>
 </div>
-
-<br />
-
-<%= link_to 'New page', new_page_path %> |
-Sort by
-<%= link_to 'Date created', by_date_created_pages_path, :id => 'sortDateCreated' %>,
-<%= link_to 'Date updated', by_date_updated_pages_path, :id => 'sortDateUpdated' %> or
-<%= link_to 'Name', by_name_pages_path, :id => 'sortName' %> |
-<%= link_to 'Home', root_path %>
