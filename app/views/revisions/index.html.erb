@@ -1,11 +1,50 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "revisions.js" %>
+<% end %>
+
 <h1>Revisions of <%= @page.name %></h1>
 
-<ul>
-  <% for revision in @revisions %>
-    <li>
-      <%= link_to revision.created_at.to_s, [@page, revision] %>
-    </li>
-  <% end %>
-</ul>
+<div id="history">
+  <% form_tag(compare_page_revisions_path, :method => :get,
+              :id => "revisions_form",
+              :onsubmit => "return versionManager.ensureSelectedVersions()") do %>
+
+    <% num = @revisions.size + 1 -%>
+    <% for r in @revisions do %>
+      <% num -= 1 -%>
+      <% rev_element = "revision_#{num}" -%>
+      <p id="<%= rev_element %>"
+        <%= "style='background: #eee'" if num % 2 != 0  %> >
+        <span><%= num %></span>
+
+        <%= check_box_tag "compare[]",
+              r.id, false,
+              :id => "compare_#{r.id}",
+              :onclick => "versionManager.checked(this)" %>
+
+        <%= link_to time_ago_in_words(r.created_at)+" ago", [@page, r] %>,
+
+        <span>
+          <% if r.minor? -%>
+            a minor edit
+	  <% else -%>
+            “<em><%= h r.comment %></em>”
+	  <% end -%>
+	</span>
+
+        by
+	<span>
+	  <%= r.user ? r.user.nickname : "unknown user" %>
+	</span>
+      </p>
+    <% end %>
+
+    <% unless @revisions.size == 1 -%>
+      Check two and
+      <%= submit_tag "Compare", :id => "compare_button", :disabled => true %>
+    <% end -%>
+
+  <% end #form %>
+</div> <!-- #history -->
 
 <%= link_to "Back to #{@page.name}", @page %>

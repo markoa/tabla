@@ -1,0 +1,82 @@
+ins, ins * {
+    color: #000;
+    background: #cfc;
+    text-decoration: none;
+    padding: 0.1em 0.3em;
+}
+
+del, del * {
+    color: #000;
+    background: #e76363;
+}
+
+del.diffdel, del.diffdel * {
+    color: #eee;
+    background: #999;
+    padding: 0.1em 0.3em;
+}
+
+code, pre {
+    font-family: Monaco, "Courier New", Courier, monospace;
+    color: #6C6582;
+    font-size: 9pt;
+}
+
+pre code {
+    display: block;
+    position: relative;
+    padding: 1em;
+    color: #98FE33;
+    background: #282633;
+    overflow: auto;
+}
+
+pre code ins {
+    background: #6A7D70;
+}
+
+/* blockquote */
+
+div.diff hr {
+    height: 0px;
+    background: #ccc;
+    border: 1px solid #ccc;
+}
+
+div.diff table {
+    background: #D6D4D9;
+}
+
+div.diff th {
+    padding: 3px 10px 3px 10px;
+    font-size: 96%;
+}
+
+div.diff td {
+    background: #fff;
+    padding: 5px;
+    font-size: 12px;
+}
+
+div.diff div h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 0.5em;
+}
+
+div.diff div {
+    border: 1px solid #999;
+    padding: 1em;
+    margin: 2em 0em;
+    width: 420px;
+    background-color: #eee;
+}
+
+div#legacy {
+    width: 364px;
+    background-image: url(/images/legacy.png);
+    background-position: 1em;
+    background-repeat: no-repeat;
+    padding-left: 70px;
+}

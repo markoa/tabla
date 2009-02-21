@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "diff.css" %>
+<% end %>
+
+<p>
+  Showing differences between revisions
+  <%= link_to @rev_to.hid.to_s, [@page, @rev_to] %>
+  and
+  <%= link_to @rev_from.hid.to_s, [@page, @rev_from] %>
+  of page <%= link_to @page.name, @page %>.
+</p>
+
+<% if @rev_from.content == @rev_to.content -%>
+  <p>
+    They are the same in fact.
+  </p>
+<% end -%>
+
+<div class="diff">
+  <%= simple_format @content %>
+</div>
+
+<%= link_to "Back to all revisions", page_revisions_path(@page) %>
