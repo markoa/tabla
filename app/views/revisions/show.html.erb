@@ -1,21 +1,12 @@
-<p>
-  <b>Content:</b>
-  <%=h @revision.content %>
-</p>
+<%= wikify @revision.content %>
 
 <p>
-  <b>Comment:</b>
-  <%=h @revision.comment %>
-</p>
-
-<p>
-  <b>Minor:</b>
-  <%=h @revision.minor %>
-</p>
-
-<p>
-  <b>Page:</b>
-  <%=h @revision.page %>
+  <% if @revision.minor? -%>
+    Minor change
+  <% else -%>
+    <b>Comment:</b>
+    <%=h @revision.comment %>
+  <% end -%>
 </p>
 
 <p>
@@ -23,6 +14,4 @@
   <%=h @revision.user %>
 </p>
 
-
-<%= link_to 'Edit', edit_revision_path(@revision) %> |
-<%= link_to 'Back', revisions_path %>
+<%= link_to 'Back', page_revisions_path(@page) %>

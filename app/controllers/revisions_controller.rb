@@ -5,7 +5,7 @@ class RevisionsController < ApplicationController
   # GET /revisions
   # GET /revisions.xml
   def index
-    @revisions = Revision.find(:all)
+    @revisions = @page.revisions.sort { |a, b| b.created_at <=> a.created_at }
 
     respond_to do |format|
       format.html # index.html.erb
