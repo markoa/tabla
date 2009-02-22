@@ -8,13 +8,11 @@ class Revision < ActiveRecord::Base
   # Returns the revision number as a human-readable number
   # between 1 and parent's total revision count
   def hid
-    return 1 if page.revisions.nil?
-
-    n = 0
-    until n >= page.revisions.length || page.revisions[n] == self
-      n += 1
+    i = page.revisions.length - 1
+    until i == 0 || page.revisions[i] == self
+      i -= 1
     end
-    page.revisions.length - n
+    i+1
   end
 
   def first?
