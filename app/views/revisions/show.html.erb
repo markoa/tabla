@@ -4,16 +4,18 @@
   <% if @revision.user -%>
     <%=h @revision.user.nickname %>
   <% else -%>
-    a user whose account has been deleted
+    A user whose account has been deleted
   <% end -%>
 
   made it on <%= @revision.created_at %>
-  <% if @revision.minor? -%>
-    and said that it's just a minor change
-  <% elsif @revision.comment.blank? -%>
-    leaving no comment behind
-  <% else -%>
-    saying ❝<%=h @revision.comment %>❞
+  <% unless @revision.first? -%>
+    <% if @revision.minor? -%>
+      and said that it's just a minor change
+    <% elsif @revision.comment.blank? -%>
+      leaving no comment behind
+    <% else -%>
+      saying ❝<%=h @revision.comment %>❞
+    <% end -%>
   <% end -%>
 </p>
 
