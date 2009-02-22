@@ -22,12 +22,13 @@
               :id => "compare_#{r.id}",
               :onclick => "versionManager.checked(this)" %>
 
+        <%= "Created " if r.first? %>
         <%= link_to time_ago_in_words(r.created_at)+" ago", [@page, r] %>,
 
         <span>
           <% if r.minor? -%>
             a minor edit
-	  <% else -%>
+	  <% elsif not r.first? -%>
             “<em><%= h r.comment %></em>”
 	  <% end -%>
 	</span>

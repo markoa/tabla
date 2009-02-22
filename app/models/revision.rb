@@ -17,4 +17,8 @@ class Revision < ActiveRecord::Base
     page.revisions.length - n
   end
 
+  def first?
+    page.revisions.first == self
+  end
+
 end
